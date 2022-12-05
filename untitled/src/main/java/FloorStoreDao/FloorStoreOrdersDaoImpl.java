@@ -138,13 +138,19 @@ public class FloorStoreOrdersDaoImpl implements FloorStoreOrderDao {
     }
 
     @Override
-    public Orders editOrderDate(String orderNum, LocalDate orderDate) {
-        loadOrders();
-        Orders currentOrder = ordersMap.get(orderNum);
-        currentOrder.setOrderDate(orderDate);
-        writeItemsToFile();
-        return currentOrder;
+    public void  editOrder(String orderNum,  Orders orders) {
+        try {
+            writeItemsToFile();
+        } catch (Exception e) {
+            System.out.println("order not edited.");
+        }
     }
+//        loadOrders();
+//        Orders currentOrder = ordersMap.get(orderNum);
+//        currentOrder.setOrderDate(orderDate);
+//        writeItemsToFile();
+//        return currentOrder;
+
 
     @Override
     public Orders editCustomerName(String orderNum, String customerName) {
@@ -174,10 +180,10 @@ public class FloorStoreOrdersDaoImpl implements FloorStoreOrderDao {
     }
 
     @Override
-    public Orders editTaxRate(String orderNum, BigDecimal taxRate) {
+    public Orders editArea(String orderNum, BigDecimal area) {
         loadOrders();
         Orders currentOrder = ordersMap.get(orderNum);
-        currentOrder.setTaxRate(taxRate);
+        currentOrder.setArea(area);
         writeItemsToFile();
         return currentOrder;
     }

@@ -50,7 +50,7 @@ public class FloorStoreView {
     //goes with main menu option 2: add an order
     public Orders collectNewOrderInfo() {
         String orderNum = io.readString("Please enter an order number.");
-        LocalDate orderDate = LocalDate.parse(io.readString("Please enter the date in DD-MM-YYYY format."));
+        LocalDate orderDate = LocalDate.parse(io.readString("Please enter the date in yyyy-mm-dd format."));
         String customerName = io.readString("Please enter customer's first and last name.");
         String customerState = io.readString("Please enter the customer's state.");
         String productType = io.readString("What product type would the customer like?");
@@ -169,44 +169,55 @@ public class FloorStoreView {
     }
 
     public String printEditMenuAndGetSelection() {
-        io.print("1. Edi Order Date.");
-        io.print("2. Edit Customer Name.");
-        io.print("3. Edit Product Type");
-        io.print("4. Edit Customer's State");
-        io.print("5. Edit state tax Rate");
-        io.print("6. Return to Main Menu");
+        io.print("1. Edit Customer Name.");
+        io.print("2. Edit Product Type");
+        io.print("3. Edit Customer's State");
+        io.print("4. Edit Area");
+        io.print("5. Return to Main Menu");
 
         return io.readString("Please select from the above choices.");
 
     }
 
-    public LocalDate getNewDate() {
-        return io.readLocalDate("Please enter the new order date.");
+
+    public Orders editOrder(Orders orders){
+        BigDecimal zero = BigDecimal.ZERO;
+
+
+        String customerName = io.readString("Please enter new customer name.");
+        String productType = io.readString("Please enter new product type.");
+        String state = io.readString("Please enter new customer state.");
+        BigDecimal area = io.readBigDecimal("Please enter the new area.");
+
+        if(customerName.equals("")){
+            customerName = orders.getCustomerName();
+        }else {
+            orders.setCustomerName(customerName);
+        }
+        if(productType.equals("")){
+            productType = orders.getProductType();
+        }else {
+            orders.setProductType(productType);
+        }
+        if(state.equals("")){
+          state = orders.getState();
+      }else {
+          orders.setState(state);
+      }
+        if(area.compareTo(zero) == 0){
+            area = orders.getArea();
+        }else {
+            orders.setArea(area);
+        }
+        return orders;
     }
 
-    public String getNewCustomerName() {
-        return io.readString("Please enter new customer name.");
-    }
 
-    public String getNewProductType() {
-        return io.readString("Please enter new product type.");
-    }
-
-    public String getNewState() {
-        return io.readString("Please enter new customer state.");
-    }
-
-    public BigDecimal getNewTaxRate() {
-        return io.readBigDecimal("Please enter new tax rate.");
-    }
 
     public void displayEditOrderBanner(){io.print("======= Edit Order =======");}
 
-    public void displayEditOrderSuccessBanner(){io.print("======= Order successfully edited. Please hit enter to continue.");}
+    public void displayEditOrderSuccessBanner(){io.print("======= Order successfully edited. Please select from menu.");}
 
-    public void displayEditOrderDateBanner() {
-        io.print("======= Edit Order Date =======");
-    }
 
     public void displayEditProductTypeBanner() {
         io.print("======= Edit Product Type =======");
@@ -220,8 +231,8 @@ public class FloorStoreView {
         io.print("======= Edit Customer's State =======");
     }
 
-    public void displayEditTaxRateBanner() {
-        io.print("======= Edit State Tax Rate =======");
+    public void displayEditAreaBanner() {
+        io.print("======= Edit Area =======");
     }
 
     public void displayNullOrder() {
@@ -229,4 +240,46 @@ public class FloorStoreView {
         io.readString("Please hit enter to continue.");
     }
     public void displayExitBanner(){io.print("======= Good Bye! =======");}
+
+
+    public String getCustomerName(Orders orders) {
+        String customerName = io.readString("Please enter customer's name");
+            if (customerName.equals("")) {
+                customerName = orders.getCustomerName();
+            } else {
+                orders.setCustomerName(customerName);
+            }
+            return customerName;
+        }
+
+
+    public String getNewProductType(Orders orders) {
+        String productType = io.readString("Please enter new product type.");
+        if(productType.equals("")){
+            productType = orders.getProductType();
+        }else {
+            orders.setProductType(productType);
+        }
+        return productType;
+    }
+
+    public String getNewState(Orders orders) {
+      String state = io.readString("Please enter new customer state.");
+      if(state.equals("")){
+          state = orders.getState();
+      }else {
+          orders.setState(state);
+      }
+      return state;
+    }
+
+    public BigDecimal editArea(Orders orders) {
+        BigDecimal area = io.readBigDecimal("Please enter the new area.");
+        if (area.equals("")) {
+            area = orders.getArea();
+        } else {
+            orders.setArea(area);
+        }
+        return area;
+    }
 }

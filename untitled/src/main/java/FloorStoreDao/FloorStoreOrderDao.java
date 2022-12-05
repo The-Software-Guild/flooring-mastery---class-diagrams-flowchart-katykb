@@ -24,7 +24,7 @@ public interface FloorStoreOrderDao {
 
     Orders removeOrder(String orderNum);
 
-    Orders editOrderDate(String orderNum, LocalDate orderDate);
+    void editOrder(String orderNum, Orders orders) throws FloorStorePersistenceException;
 
     Orders editCustomerName(String orderNum, String customerName);
 
@@ -32,5 +32,5 @@ public interface FloorStoreOrderDao {
 
     Orders editCustomerState(String orderNum, String customerState);
 
-    Orders editTaxRate(String orderNum, BigDecimal taxRate);
+    Orders editArea(String orderNum, BigDecimal taxRate);
 }

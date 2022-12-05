@@ -32,10 +32,6 @@ public class Orders {
         return orderNum;
     }
 
-    public void setOrderNum(String orderNum) {
-        this.orderNum = orderNum;
-    }
-
     public String getCustomerName() {
         return customerName;
     }

@@ -86,22 +86,20 @@ public class FloorStoreController {
             while (keepGoing) {
                 editMenuSelection = myView.printEditMenuAndGetSelection();
                 switch (editMenuSelection) {
+//
                     case "1":
-                        editOrderDate(orderNum);
+                        editCustomerName(orderNum, new Orders(orderNum));
                         break;
                     case "2":
-                        editCustomerName(orderNum);
+                        editProductType(orderNum, new Orders(orderNum));
                         break;
                     case "3":
-                        editProductType(orderNum);
+                        editCustomerState(orderNum, new Orders(orderNum));
                         break;
                     case "4":
-                        editCustomerState(orderNum);
-                        break;
+                        editArea(orderNum, new Orders(orderNum));
+                      break;
                     case "5":
-                        editStateTax(orderNum);
-                        break;
-                    case "6":
                         keepGoing = false;
                         break;
                     default:
@@ -115,44 +113,38 @@ public class FloorStoreController {
 
     }
 
-    private void editStateTax(String orderNum) throws FloorStorePersistenceException {
-        myView.displayEditProductTypeBanner();
-        BigDecimal newTaxRate = myView.getNewTaxRate();
-        myService.editTaxRate(orderNum, newTaxRate);
-        myView.displayEditOrderSuccessBanner();
-    }
-
-    private void editCustomerState(String orderNum) throws FloorStorePersistenceException {
+    private void editCustomerState(String orderNum, Orders orders) throws FloorStorePersistenceException {
         myView.displayEditCustomersStateBanner();
-        String newState = myView.getNewState();
+        String newState = myView.getNewState(orders);
         myService.editCustomerState(orderNum, newState);
         myView.displayEditOrderSuccessBanner();
 
     }
 
-    private void editProductType(String orderNum) throws FloorStorePersistenceException {
+    private void editProductType(String orderNum, Orders orders) throws FloorStorePersistenceException {
         myView.displayEditProductTypeBanner();
-        String newProduct = myView.getNewProductType();
+        String newProduct = myView.getNewProductType(orders);
         myService.editProductType(orderNum, newProduct);
         myView.displayEditOrderSuccessBanner();
 
     }
 
-    private void editCustomerName(String orderNum) throws FloorStorePersistenceException {
+    private void editCustomerName(String orderNum, Orders orders) throws FloorStorePersistenceException {
         myView.displayEditCustomersNameBanner();
-        String newCustomerName = myView.getNewCustomerName();
+        String newCustomerName = myView.getCustomerName(orders);
         myService.editCustomerName(orderNum, newCustomerName);
         myView.displayEditOrderSuccessBanner();
 
     }
 
-    private void editOrderDate(String orderNum) throws FloorStorePersistenceException {
-        myView.displayEditOrderDateBanner();
-        LocalDate newOrderDate = myView.getNewDate();
-        myService.editOrderDate(orderNum, newOrderDate);
+    private void editArea(String orderNum, Orders orders) throws FloorStorePersistenceException{
+        myView.displayEditAreaBanner();
+        BigDecimal area = myView.editArea(orders);
+        myService.editArea(orderNum, area);
         myView.displayEditOrderSuccessBanner();
-
     }
+
+
 
     private void removeOrder() throws FloorStorePersistenceException {
         myView.displayRemoveOrderBanner();

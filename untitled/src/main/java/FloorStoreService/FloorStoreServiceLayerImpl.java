@@ -98,16 +98,14 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
     }
 
     @Override
-    public Orders editOrder(String orderNum) {
-        return null;
-    }
-
-    @Override
-    public Orders editOrderDate(String orderNum, LocalDate orderDate) throws FloorStorePersistenceException {
-        Orders newOrderDate = myDao.editOrderDate(orderNum, orderDate);
-        myAdao.writeAuditEntry(orderNum + ": has a new order date of: " + newOrderDate);
-        return newOrderDate;
-    }
+    public Orders editOrder(String orderNum, Orders orders) throws FloorStorePersistenceException {
+        if(orders.getOrderNum().equals("")){
+            throw new FloorStorePersistenceException("Please enter order Number.");
+        } else {
+            myDao.editOrder(orderNum, orders);
+        }
+        return orders;
+}
 
     @Override
     public Orders editCustomerName(String orderNum, String customerName) throws FloorStorePersistenceException {
@@ -131,8 +129,8 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
     }
 
     @Override
-    public Orders editTaxRate(String orderNum, BigDecimal taxRate) throws FloorStorePersistenceException {
-        Orders newOrder = myDao.editTaxRate(orderNum, taxRate);
+    public Orders editArea(String orderNum, BigDecimal taxRate) throws FloorStorePersistenceException {
+        Orders newOrder = myDao.editArea(orderNum, taxRate);
         myAdao.writeAuditEntry(orderNum + ": tax rate has been changed to: " + taxRate);
         return newOrder;
     }

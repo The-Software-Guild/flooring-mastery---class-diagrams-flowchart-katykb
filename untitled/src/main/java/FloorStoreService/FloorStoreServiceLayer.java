@@ -20,9 +20,7 @@ public interface FloorStoreServiceLayer {
 
     Orders removeOrder( String orderNum) throws FloorStorePersistenceException;
 
-    Orders editOrder(String orderNum);
-
-    Orders editOrderDate(String orderNum, LocalDate orderDate) throws FloorStorePersistenceException;
+    Orders editOrder(String orderNum, Orders orders) throws FloorStorePersistenceException;
 
     Orders editCustomerName(String orderNum, String customerName) throws FloorStorePersistenceException;
 
@@ -30,5 +28,5 @@ public interface FloorStoreServiceLayer {
 
     Orders editCustomerState(String orderNum, String customerState) throws FloorStorePersistenceException;
 
-    Orders editTaxRate(String orderNum, BigDecimal taxRate) throws FloorStorePersistenceException;
+    Orders editArea(String orderNum, BigDecimal taxRate) throws FloorStorePersistenceException;
 }
