@@ -88,17 +88,17 @@ public class FloorStoreController {
                 switch (editMenuSelection) {
 //
                     case "1":
-                        editCustomerName(orderNum, new Orders(orderNum));
+                        editCustomerName(orderNum, currentOrder);
                         break;
                     case "2":
-                        editProductType(orderNum, new Orders(orderNum));
+                        editProductType(orderNum, currentOrder);
                         break;
                     case "3":
-                        editCustomerState(orderNum, new Orders(orderNum));
+                        editCustomerState(orderNum, currentOrder);
                         break;
                     case "4":
-                        editArea(orderNum, new Orders(orderNum));
-                      break;
+                        editArea(orderNum, currentOrder);
+                        break;
                     case "5":
                         keepGoing = false;
                         break;
@@ -161,6 +161,6 @@ public class FloorStoreController {
     }
 
     private void exitMessage() {
-       myView.displayExitBanner();
+        myView.displayExitBanner();
     }
 }

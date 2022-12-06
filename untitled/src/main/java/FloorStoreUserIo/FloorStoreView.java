@@ -200,10 +200,10 @@ public class FloorStoreView {
             orders.setProductType(productType);
         }
         if(state.equals("")){
-          state = orders.getState();
-      }else {
-          orders.setState(state);
-      }
+            state = orders.getState();
+        }else {
+            orders.setState(state);
+        }
         if(area.compareTo(zero) == 0){
             area = orders.getArea();
         }else {
@@ -244,13 +244,13 @@ public class FloorStoreView {
 
     public String getCustomerName(Orders orders) {
         String customerName = io.readString("Please enter customer's name");
-            if (customerName.equals("")) {
-                customerName = orders.getCustomerName();
-            } else {
-                orders.setCustomerName(customerName);
-            }
-            return customerName;
+        if (customerName.equals("")) {
+            customerName = orders.getCustomerName();
+        } else {
+            orders.setCustomerName(customerName);
         }
+        return customerName;
+    }
 
 
     public String getNewProductType(Orders orders) {
@@ -264,13 +264,13 @@ public class FloorStoreView {
     }
 
     public String getNewState(Orders orders) {
-      String state = io.readString("Please enter new customer state.");
-      if(state.equals("")){
-          state = orders.getState();
-      }else {
-          orders.setState(state);
-      }
-      return state;
+        String state = io.readString("Please enter new customer state.");
+        if(state.equals("")){
+            state = orders.getState();
+        }else {
+            orders.setState(state);
+        }
+        return state;
     }
 
     public BigDecimal editArea(Orders orders) {
@@ -283,3 +283,4 @@ public class FloorStoreView {
         return area;
     }
 }
+

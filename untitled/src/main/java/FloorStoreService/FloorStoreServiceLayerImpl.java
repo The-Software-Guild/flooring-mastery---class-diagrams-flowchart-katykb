@@ -39,14 +39,15 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
 
     @Override
     public void createOrder(String orderNum, Orders newOrder) throws IOException, OrderValidationException, FloorStorePersistenceException {
-        if (myDao.getOrder(newOrder.getOrderNum()) != null) {
-            throw new IOException("ERROR: can not add order." + newOrder.getOrderNum() + " already exists.");
-        }
+//        if (myDao.getOrder(newOrder.getOrderNum()) != null) {
+//            throw new IOException("ERROR: can not add order." + newOrder.getOrderNum() + " already exists.");
+//        }
         validateOrderData(newOrder);
 
         myDao.addOrder(orderNum, newOrder);
         myAdao.writeAuditEntry("Order " + newOrder.getOrderNum() + " was Created.");
     }
+
     @Override
     public Orders calculateCosts(Orders newOrder) throws Exception {
         BigDecimal taxRate = new BigDecimal(0);
@@ -87,8 +88,10 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
         } else {
             throw new Exception("must enter area to continue");
         }
+
         return newOrder;
     }
+
 
     @Override
     public Orders removeOrder(String orderNum) throws FloorStorePersistenceException {
@@ -99,13 +102,13 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
 
     @Override
     public Orders editOrder(String orderNum, Orders orders) throws FloorStorePersistenceException {
-        if(orders.getOrderNum().equals("")){
+        if (orders.getOrderNum().equals("")) {
             throw new FloorStorePersistenceException("Please enter order Number.");
         } else {
             myDao.editOrder(orderNum, orders);
         }
         return orders;
-}
+    }
 
     @Override
     public Orders editCustomerName(String orderNum, String customerName) throws FloorStorePersistenceException {
@@ -129,9 +132,9 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
     }
 
     @Override
-    public Orders editArea(String orderNum, BigDecimal taxRate) throws FloorStorePersistenceException {
-        Orders newOrder = myDao.editArea(orderNum, taxRate);
-        myAdao.writeAuditEntry(orderNum + ": tax rate has been changed to: " + taxRate);
+    public Orders editArea(String orderNum, BigDecimal area) throws FloorStorePersistenceException {
+        Orders newOrder = myDao.editArea(orderNum, area);
+        myAdao.writeAuditEntry(orderNum + ": area has been changed to: " + area);
         return newOrder;
     }
 
