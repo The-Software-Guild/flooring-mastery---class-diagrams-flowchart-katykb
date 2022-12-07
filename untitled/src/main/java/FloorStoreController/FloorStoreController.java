@@ -23,8 +23,6 @@ public class FloorStoreController {
     }
 
     public void run() throws Exception {
-//        myView.printMainMenu();
-//        myView.getMainMenuSelection();
         boolean keepGoing = true;
         while (keepGoing) {
             String menuSelection = myView.printMainMenu();
@@ -150,8 +148,9 @@ public class FloorStoreController {
         myView.displayRemoveOrderBanner();
         String orderNum = myView.getOrderNumberByChoice();
         myService.removeOrder(orderNum);
+        myView.displayRemovedOrder(orderNum);
         myView.displayRemoveSuccessBanner();
-        //myView.displayRemovedOrder(orderNum);
+
 
     }
 

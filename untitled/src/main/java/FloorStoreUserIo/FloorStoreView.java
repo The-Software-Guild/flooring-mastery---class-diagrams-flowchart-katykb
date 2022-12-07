@@ -46,11 +46,7 @@ public class FloorStoreView {
         }
         return list;
     }
-//
-//    Carpet,2.25,2.10
-//    Laminate,1.75,2.10
-//    Tile,3.50,4.15
-//    Wood,5.15,4.75
+
     //goes with main menu option 2: add an order
     public Orders collectNewOrderInfo() {
         String orderNum = io.readString("Please enter an order number.");
@@ -223,7 +219,8 @@ public class FloorStoreView {
 
 
     public String getNewProductType(Orders orders) {
-        String productType = io.readString("Please enter new product type. \nEnter: Carpet, Laminate, Tile, or Wood");
+        String productType = io.readString("Please enter new product type. \nEnter: Carpet, Laminate, Tile, or Wood" +
+                "");
         if(productType.equals("")){
             productType = orders.getProductType();
         }else {

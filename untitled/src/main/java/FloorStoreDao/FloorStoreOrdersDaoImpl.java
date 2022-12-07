@@ -5,8 +5,6 @@ import FloorStoreDto.Orders;
 import java.io.*;
 import java.math.BigDecimal;
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.*;
 
 public class FloorStoreOrdersDaoImpl implements FloorStoreOrderDao {
@@ -14,7 +12,7 @@ public class FloorStoreOrdersDaoImpl implements FloorStoreOrderDao {
     private final String ORDERS_FILE = "orders.txt";
     private final String DELIMITER = ",";
 
-    //private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MM-DD-YYYY");
+
     private Map<String, Orders> ordersMap = new HashMap<>();
 
 
@@ -64,7 +62,7 @@ public class FloorStoreOrdersDaoImpl implements FloorStoreOrderDao {
             currentLine = scanner.nextLine();
             currentOrder = unmarshallOrder(currentLine);
             ordersMap.put(currentOrder.getOrderNum(), currentOrder);
-            //System.out.println(currentLine);
+
         }
         scanner.close();
 
@@ -145,11 +143,7 @@ public class FloorStoreOrdersDaoImpl implements FloorStoreOrderDao {
             System.out.println("order not edited.");
         }
     }
-//        loadOrders();
-//        Orders currentOrder = ordersMap.get(orderNum);
-//        currentOrder.setOrderDate(orderDate);
-//        writeItemsToFile();
-//        return currentOrder;
+
 
 
     @Override
