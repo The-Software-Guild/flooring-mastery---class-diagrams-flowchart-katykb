@@ -54,17 +54,21 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
         BigDecimal area = newOrder.getArea();
         List<StateTax> taxRatesList = myTdao.loadStateTax();
         List<Products> productsList = myPdao.loadProducts();
-
+        System.out.println("about to check area" + " " + (area.compareTo(BigDecimal.ZERO) >= 0));
+        System.out.println(area);
         if (area.compareTo(BigDecimal.ZERO) >= 0) {
 
             for (StateTax tax : taxRatesList) {
+                System.out.println(tax.getStateAbbreviation() + " " + newOrder.getState());
                 if (tax.getStateAbbreviation().equals(newOrder.getState())) {
                     taxRate = tax.getTrTaxRate();
                 }
             }
-
+            System.out.println("checking product list cout" + " " + productsList.size());
             for (Products products : productsList) {
-                if (products.getPfProductType().equals(newOrder.getProductType())) {
+                System.out.println("about to check produt" + " " + products.getPfProductType().equals(newOrder.getProductType()));
+                System.out.println(products.getPfProductType() + " " + newOrder.getProductType());
+                if (products.getPfProductType().equalsIgnoreCase(newOrder.getProductType())) {
                     BigDecimal costSqFt = (products.getPfCostPerSquareFoot());
                     BigDecimal laborCostSqFt = (products.getPfLaborCostPerSquareFoot());
                     BigDecimal materialTotal = area.multiply(costSqFt);
@@ -75,7 +79,7 @@ public class FloorStoreServiceLayerImpl implements FloorStoreServiceLayer {
                     BigDecimal salesTaxCalc = orderSubTotal.multiply(taxRate.divide(BigDecimal.valueOf(100)));
                     BigDecimal salesTaxTotal = salesTaxCalc.setScale(2, RoundingMode.HALF_UP);
                     BigDecimal orderTotalCost = orderSubTotal.add(salesTaxTotal);
-
+                    System.out.println("setting calculations");
                     newOrder.setTaxRate(taxRate);
                     newOrder.setCostPerSqFt(costSqFt);
                     newOrder.setLaborCostPerSqFt(laborCostSqFt);

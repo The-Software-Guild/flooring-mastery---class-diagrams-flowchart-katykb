@@ -12,7 +12,7 @@ public interface FloorStoreUserIo {
 
     String readString(String prompt);
 
-       LocalDate readLocalDate(String prompt);
+    LocalDate readLocalDate(String prompt);
 
     double readDouble(String prompt);
 

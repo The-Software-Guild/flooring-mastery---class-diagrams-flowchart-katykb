@@ -68,7 +68,7 @@ public class FloorStoreController {
         myView.displayCreateNewOrderBanner();
         Orders newOrder = myView.collectNewOrderInfo();
         Orders getCostInfo = myService.calculateCosts(newOrder);
-        myView.displayOrderDetails(getCostInfo);
+        myView.displayOrderDetails(newOrder);
         myService.createOrder(newOrder.getOrderNum(), getCostInfo);
         myView.displayOrderSuccessfullyCreatedBanner();
     }

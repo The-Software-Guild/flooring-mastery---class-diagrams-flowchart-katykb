@@ -71,6 +71,7 @@ public class FloorStoreUserIoImpl implements FloorStoreUserIo{
 
     @Override
     public BigDecimal readBigDecimal(String prompt) {
-        return null;
+        System.out.println(prompt);
+        return console.nextBigDecimal();
     }
 }
